@@ -1,16 +1,16 @@
-﻿$jobuserpswd = "5oup+ime"
+﻿$jobuserpswd = "Password"
 $password = ConvertTo-SecureString $jobuserpswd -AsPlainText -Force
-$username = "Dv\svcdvspsetup"
-$dvauthservername = "dvspapp1"
+$username = "server/username"
+$dvauthservername = "servername"
 $cred = New-Object System.Management.Automation.PSCredential($username,$password)
 
 try{
 Invoke-Command -ComputerName $dvauthservername -Credential $cred -Authentication Credssp -ScriptBlock{
 Add-PSSnapin Microsoft.SharePoint.Powershell -ErrorAction SilentlyContinue
-$SearchServiceApplication = Get-SPEnterpriseSearchServiceApplication -Identity "Search Service Application (Pub)" 
+$SearchServiceApplication = Get-SPEnterpriseSearchServiceApplication -Identity "Search Service Application" 
 
 #Get the Local SharePoint sites content source  
-$ContentSource = $SearchServiceApplication | Get-SPEnterpriseSearchCrawlContentSource -Identity "Community"  
+$ContentSource = $SearchServiceApplication | Get-SPEnterpriseSearchCrawlContentSource -Identity "Your Search Application Content Source"  
   
   #Check if Crawler is not already running or Idle  
   if($ContentSource.CrawlState -eq "Idle")  
