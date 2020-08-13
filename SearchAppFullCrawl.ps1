@@ -1,11 +1,11 @@
-﻿$jobuserpswd = "Password"
+$jobuserpswd = "Password"
 $password = ConvertTo-SecureString $jobuserpswd -AsPlainText -Force
 $username = "server/username"
-$dvauthservername = "servername"
+$servername = "servername"
 $cred = New-Object System.Management.Automation.PSCredential($username,$password)
 
 try{
-Invoke-Command -ComputerName $dvauthservername -Credential $cred -Authentication Credssp -ScriptBlock{
+Invoke-Command -ComputerName $servername -Credential $cred -Authentication Credssp -ScriptBlock{
 Add-PSSnapin Microsoft.SharePoint.Powershell -ErrorAction SilentlyContinue
 $SearchServiceApplication = Get-SPEnterpriseSearchServiceApplication -Identity "Search Service Application" 
 
